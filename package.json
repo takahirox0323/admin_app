@@ -8,15 +8,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/material": "^5.2.8",
+    "@mui/styled-engine-sc": "^5.1.0",
+    "@mui/x-data-grid": "^5.2.2",
     "next": "12.0.8",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-query": "^3.5.0",
+    "resolve-from": "^5.0.0",
+    "styled-components": "^5.3.3",
+    "x-data-grid": "^2.1.0"
   },
   "devDependencies": {
     "@types/node": "17.0.8",
     "@types/react": "17.0.38",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.8",
+    "prettier": "2.5.1",
     "typescript": "4.5.4"
   }
 }
