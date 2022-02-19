@@ -3,13 +3,10 @@ import { useCallback, useEffect, useState } from "react";
 import type { NextPage } from "next";
 import { ReactQuery } from "@/Components/Layout/ReactQuery";
 import Button from "@mui/material/Button";
-import { Box, Typography } from "@mui/material";
-import { Header } from "@/Components/organizm/Header";
+import { Box } from "@mui/material";
 import { Spacer } from "@/Components/Layout/Spacer";
-import { Sidebar } from "@/Components/organizm/Sidebar";
 import Container from "@mui/material/Container";
 import Tooltip from "@mui/material/Tooltip";
-import { AlertDialog } from "@/Components/organizm/Dialog";
 import { SimpleTable } from "@/Components/organizm/Table";
 import { PageLayout } from "@/Components/organizm/PageLayout";
 
@@ -60,27 +57,7 @@ const Homes: React.FC = () => {
               flexDirection:"column"
             }}
           >
-              <Box display="flex" justifyContent="flex-end" >
-                <Tooltip title="登録">
-                  <Button
-                    variant="contained"
-                    onClick={handleDialogModal}
-                    sx={{
-                      boxShadow: "unset",
-                    }}
-                  >
-                    登録する
-                    <AlertDialog
-                handleDialogModal={handleDialogModal}
-                isDialogOpen={isDialogOpen}
-              />
-                  </Button>
-                </Tooltip>
-              </Box>
-            <Spacer size={16} vertical/>
-            <Box display="flex" flex={1}>
-              <SimpleTable branchList={branchList} />
-            </Box>
+             <h1>ユーザー一覧</h1>
           </Container>
         </PageLayout>
   );

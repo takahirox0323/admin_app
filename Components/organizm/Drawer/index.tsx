@@ -1,12 +1,5 @@
 import React from "react";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import { Drawer as DrawerComponent, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 
 type Props = { onChangeModal: () => void };
@@ -25,41 +18,55 @@ export const Drawer = (props) => {
   };
 
   const list = () => (
-    <Box sx={{ width: 250 }} role="presentation">
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+    <Box
+      sx={{
+        background: "#fff",
+        boxShadow:
+          "0px 8px 10px -5px rgb(0 0 0 / 20%), 0px 16px 24px 2px rgb(0 0 0 / 14%), 0px 6px 30px 5px rgb(0 0 0 / 12%)",
+        height: "100%",
+        borderRadius: 3,
+      }}
+      role="presentation"
+    >
+      <Box
+        padding={2}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        borderBottom="1px solid #ddd"
+      >
+        <Typography variant={"h6"} fontWeight="600">
+          お知らせ
+        </Typography>
+      </Box>
     </Box>
   );
 
   return (
-    <div>
-      <SwipeableDrawer
-        anchor={"left"}
-        open={props.isOpen}
-        onClose={toggleDrawer()}
-        onOpen={toggleDrawer()}
-      >
-        {list()}
-      </SwipeableDrawer>
-    </div>
+    <DrawerComponent
+      anchor={"top"}
+      open={props.isOpen}
+      onClose={() => props.onChangeModal()}
+      ModalProps={{
+        BackdropProps: { invisible: true },
+        sx: { width: "400px" },
+      }}
+      PaperProps={{
+        sx: {
+          width: "400px",
+          top: 0,
+          right: 20,
+          left: "unset",
+          bottom: "unset",
+          height: "100%",
+          background: "unset",
+          boxShadow: "unset",
+          padding: "20px",
+          paddingTop: "60px",
+        },
+      }}
+    >
+      {list()}
+    </DrawerComponent>
   );
 };

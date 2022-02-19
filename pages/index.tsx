@@ -2,15 +2,7 @@ import { useFetchSite } from "@/hooks";
 import { useCallback, useEffect, useState } from "react";
 import type { NextPage } from "next";
 import { ReactQuery } from "@/Components/Layout/ReactQuery";
-import Button from "@mui/material/Button";
-import { Box, Typography } from "@mui/material";
-import { Header } from "@/Components/organizm/Header";
-import { Spacer } from "@/Components/Layout/Spacer";
-import { Sidebar } from "@/Components/organizm/Sidebar";
-import Container from "@mui/material/Container";
-import Tooltip from "@mui/material/Tooltip";
-import { AlertDialog } from "@/Components/organizm/Dialog";
-import { SimpleTable } from "@/Components/organizm/Table";
+import { Box, Container, Typography } from "@mui/material";
 import { PageLayout } from "@/Components/organizm/PageLayout";
 
 const Home: NextPage = () => {
@@ -36,9 +28,18 @@ const Homes: React.FC = () => {
 
   return (
     <PageLayout>
-      <Box display="flex" flexDirection="column">
-        <h1>ダッシュボードです</h1>
-      </Box>
+      <Container
+        maxWidth={false}
+        sx={{
+          padding: 2,
+          background: "#e2e9f7",
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <h1>ダッシュボード</h1>
+      </Container>
     </PageLayout>
   );
 };

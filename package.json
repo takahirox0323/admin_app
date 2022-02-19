@@ -11,16 +11,20 @@
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.5",
+    "@mui/lab": "^5.0.0-alpha.65",
     "@mui/material": "^5.2.8",
     "@mui/styled-engine-sc": "^5.1.0",
     "@mui/x-data-grid": "^5.2.2",
+    "formik": "^2.2.9",
     "next": "12.0.8",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-hot-toast": "^2.2.0",
     "react-query": "^3.5.0",
     "resolve-from": "^5.0.0",
     "styled-components": "^5.3.3",
-    "x-data-grid": "^2.1.0"
+    "x-data-grid": "^2.1.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/node": "17.0.8",

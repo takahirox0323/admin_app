@@ -27,7 +27,7 @@ export const PageLayout: React.FC = ({
 
   return (
     <>
-      <Box sx={{ display: "flex", height: "100vh" }}>
+      <Box sx={{ display: "flex", height: "100%" }}>
         <Sidebar isOpen={isOpen} />
         <Box display="flex" flexDirection="column" flexGrow={1}>
           <Header onChangeModal={onChangeModal} />

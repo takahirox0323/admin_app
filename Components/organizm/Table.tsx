@@ -9,46 +9,21 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { Branch } from "@/types/branch";
 import { DataGrid } from "@mui/x-data-grid";
+import { Box, CircularProgress } from "@mui/material";
+import { Loading } from "@/Components/organizm/Loading";
 
 type Props = {
   branchList: Branch[];
+  isLoading?: boolean;
 };
 
 const TABLE_SIZE = "40px 1fr 1fr 1fr 1fr 1fr";
 
-export const SimpleTable: React.FC<Props> = ({ branchList }) => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
-  return (
-    <Paper sx={{ width: "100%", overflow: "hidden", borderRadius: 2 }}>
-      <TableContainer sx={{ flex: 1, height: "100%", display: "flex" }}>
-        <Table
-          stickyHeader
-          aria-label="sticky table"
-          sx={{ display: "flex", flexDirection: "column" }}
-        >
-          <TableHead>
-            <TableRow
-              sx={{
-                display: "grid",
-                gridTemplateColumns: TABLE_SIZE,
-              }}
-            >
-              {columns.map((column) => (
-                <TableCell key={column.id}>{column.label}</TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+export const SimpleTable: React.FC<Props> = ({ branchList, isLoading }) => {
+  const Body = () => {
+    return (
+      <>
+        <Loading isLoading={isLoading} data={branchList}>
           <TableBody
             sx={{ display: "block", flex: "1 0 0", overflow: "scroll" }}
           >
@@ -78,6 +53,40 @@ export const SimpleTable: React.FC<Props> = ({ branchList }) => {
               );
             })}
           </TableBody>
+        </Loading>
+      </>
+    );
+  };
+
+  return (
+    <Paper
+      sx={{
+        width: "100%",
+        overflow: "hidden",
+        borderRadius: 2,
+        display: "flex",
+        flex: 1,
+      }}
+    >
+      <TableContainer sx={{ flex: 1, height: "100%", display: "flex" }}>
+        <Table
+          stickyHeader
+          aria-label="sticky table"
+          sx={{ display: "flex", flexDirection: "column" }}
+        >
+          <TableHead>
+            <TableRow
+              sx={{
+                display: "grid",
+                gridTemplateColumns: TABLE_SIZE,
+              }}
+            >
+              {columns.map((column) => (
+                <TableCell key={column.id}>{column.label}</TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <Body />
         </Table>
       </TableContainer>
     </Paper>

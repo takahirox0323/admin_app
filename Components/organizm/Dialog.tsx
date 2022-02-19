@@ -7,12 +7,26 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export const AlertDialog = (props) => {
+type Props = {
+  onClickOK: () => void;
+  onClickCancel: () => void;
+  handleClose: () => void;
+  isOpen: boolean;
+  desc: String;
+};
+
+export const Modal: React.FC<Props> = ({
+  onClickOK,
+  onClickCancel,
+  isOpen,
+  handleClose,
+  desc,
+}) => {
   return (
     <div>
       <Dialog
-        open={props.isDialogOpen}
-        onClose={props.handleDialogModal}
+        open={isOpen}
+        onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -21,13 +35,12 @@ export const AlertDialog = (props) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
+            {desc}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.handleDialogModal}>Disagree</Button>
-          <Button onClick={props.handleDialogModal} autoFocus>
+          <Button onClick={onClickCancel}>Disagree</Button>
+          <Button onClick={onClickOK} autoFocus>
             Agree
           </Button>
         </DialogActions>

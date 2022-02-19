@@ -1,6 +1,18 @@
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider, QueryCache } from "react-query";
+import toast from "react-hot-toast";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      cacheTime: 0,
+      staleTime: Infinity,
+      // onError: (error) => {
+      //   toast.error(`データを取得できませんでした `);
+      // },
+    },
+  },
+});
 
 export const ReactQuery = ({
   children,

@@ -29,7 +29,6 @@ import ApartmentIcon from "@mui/icons-material/Apartment";
 import BusinessIcon from "@mui/icons-material/Business";
 import StoreTwoToneIcon from "@mui/icons-material/StoreTwoTone";
 import { PageLayout } from "@/Components/organizm/PageLayout";
-import CameraAltRoundedIcon from "@mui/icons-material/CameraAltRounded";
 import { UserInformation } from "@/Components/template/Profile/UserProfile";
 type Props = {
   // branchList?: Branch[];

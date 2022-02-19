@@ -4,3 +4,7 @@ export type Branch = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type BranchRequest = {
+  name: string;
+};
