@@ -1,30 +1,40 @@
 import axios from "axios";
 import { API_URL } from "@/config";
-import { Branch, BranchRequest } from "@/types/branch";
+import {
+  Branch,
+  ParkRequest,
+  ParkTypeRequest,
+  UserRequest,
+} from "@/types/branch";
+import { PhotoRequest } from "@/types/Photo";
 
 // 現場一覧取得
-export const fetchSiteDataList = async (
-  branchId?: number
-): Promise<Branch[]> => {
-  const fetchedSiteList = await axios.get(`${API_URL}/branchs`);
-  return fetchedSiteList.data;
+export const fetchSiteDataList = async (): Promise<any[]> => {
+  const fetchedParkList = await axios.get(`${API_URL}/parks`);
+  const fetchedArea = await axios.get(`${API_URL}/areas`);
+  const fetchedPrefecture = await axios.get(`${API_URL}/prefectures`);
+  return await Promise.all([fetchedParkList, fetchedArea, fetchedPrefecture]);
 };
 
 // 現場を登録
-export const postBranch = async (body: BranchRequest): Promise<void> => {
-  return await axios.post(`${API_URL}/branches`, body);
+export const postBranch = async (body: ParkRequest): Promise<void> => {
+  return await axios.post(`${API_URL}/parks`, body);
 };
 
-// // 現場を更新
-// export const updateSiteData = async (
-//   siteId: number,
-//   body: SiteRequest
-// ): Promise<void> => {
-//   const idToken = await fetchIdToken();
-//   return await axios.put(`${API_URL}/sites/${siteId}`, body, {
-//     headers: { Authorization: `Bearer ${idTosken}` },
-//   });
-// }
+// 公園タイプ一覧更新
+export const postParkType = async (body: ParkTypeRequest): Promise<void> => {
+  return await axios.post(`${API_URL}/parkTypes`, body);
+};
+
+// 公園タイプ一覧更新
+export const postUser = async (body: UserRequest): Promise<void> => {
+  return await axios.post(`${API_URL}/users`, body);
+};
+
+// 写真更新
+export const postPhoto = async (body: PhotoRequest): Promise<void> => {
+  return await axios.post(`${API_URL}/photos`, body);
+};
 
 //タグAPI
 export const TAGS = [

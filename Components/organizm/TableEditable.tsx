@@ -1,4 +1,4 @@
-import { useFetchSite, usePostSite } from "@/hooks";
+import { usePostPark } from "@/hooks";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import { Box, Dialog, TextField, Typography } from "@mui/material";
@@ -8,7 +8,6 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import { Snackbar } from "../atoms/SnackBar";
-import { BranchRequest } from "@/types/branch";
 import * as yup from "yup";
 import { Formik, useFormik, Field, Form } from "formik";
 import Router from "next/router";
@@ -26,30 +25,16 @@ export const TableEditable = (props) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      UseMutationResult.mutateAsync();
+      console;
     },
   });
 
-  const { UseMutationResult } = usePostSite(formik.values);
-
   const onChangeModal = () => {
     Router.push("/BranchRegister");
-    // setDialogOpen(!isDialogOpen);
   };
 
   return (
     <>
-      {(UseMutationResult.isError || UseMutationResult.isSuccess) && (
-        <Snackbar
-          type={UseMutationResult.isError ? "error" : "success"}
-          data={UseMutationResult.status}
-          message={
-            UseMutationResult.isError
-              ? "データの更新に失敗しました"
-              : "データの更新に成功しました"
-          }
-        />
-      )}
       <Box display="flex" justifyContent="flex-start">
         <Tooltip title="削除">
           <Button

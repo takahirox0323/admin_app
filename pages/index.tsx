@@ -1,4 +1,3 @@
-import { useFetchSite } from "@/hooks";
 import { useCallback, useEffect, useState, useRef } from "react";
 import type { NextPage } from "next";
 import { ReactQuery } from "@/Components/Layout/ReactQuery";
@@ -17,6 +16,7 @@ import { Tag, Tags } from "@/Components/atoms/Tag";
 import { Thumbnail } from "@/Components/atoms/Thumbnail";
 import ParkRoundedIcon from "@mui/icons-material/ParkRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import { useParkList } from "@/hooks";
 
 const AREA = [
   { name: "北海道", prefectures: [] },
@@ -40,7 +40,6 @@ const Home: NextPage = () => {
 };
 
 const Homes: React.FC = () => {
-  const { branchList } = useFetchSite();
   const [type, setType] = useState<string>("");
   const [isDialogOpen, setDialogOpen] = useState(false);
 
@@ -79,10 +78,10 @@ const Homes: React.FC = () => {
             {/* 各都道府県の公園 */}
             <SectionTitle name="東京都の公園" />
             <Spacer size={24} vertical />
-            <Grid container spacing={2.5} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid container spacing={2.5} columns={{ xs: 12, sm: 12, md: 12 }}>
               {CARD.map((card) => {
                 return (
-                  <Grid item xs={2} sm={4} md={4}>
+                  <Grid item xs={4} sm={4} md={4}>
                     <Box
                       display="flex"
                       sx={{ paddingTop: "100%", background: "#ccc" }}

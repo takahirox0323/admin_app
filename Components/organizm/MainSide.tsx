@@ -1,4 +1,3 @@
-import { useFetchSite } from "@/hooks";
 import { useCallback, useEffect, useState, useRef } from "react";
 import type { NextPage } from "next";
 import { ReactQuery } from "@/Components/Layout/ReactQuery";
@@ -6,15 +5,28 @@ import {
   Box,
   Button,
   Container,
+  Fade,
   Grid,
   makeStyles,
   TextField,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import { Spacer } from "@/Components/Layout/Spacer";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { Tag, Tags } from "../atoms/Tag";
+import { CustomToolTip } from "../atoms/CustomToolTip";
+import { styled } from "@mui/material/styles";
+import Tooltip, { TooltipProps } from "@mui/material/Tooltip";
+
+const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))`
+  & .MuiTooltip-tooltip {
+    background: #fff;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
+    border: 1px solid #ddd;
+  }
+`;
 
 export const MainSide: React.FC = () => {
   const [type, setType] = useState<string>("");
@@ -33,6 +45,7 @@ export const MainSide: React.FC = () => {
     { name: "中国・四国" },
     { name: "九州・沖縄" },
   ];
+
   return (
     <Box width="275px">
       {/* 都道府県から探す */}
@@ -55,14 +68,16 @@ export const MainSide: React.FC = () => {
       <Box display="flex" flexDirection="column">
         {AREA.map((area) => {
           return (
-            <Tooltip
+            <StyledTooltip
+              TransitionComponent={Fade}
+              TransitionProps={{ timeout: 0 }}
               onOpen={() => onChangeColor(area.name)}
               onClose={() => setType("")}
               placement="right-start"
               sx={{
-                background: "#fff",
-                border: "1px solid #dedede",
                 padding: "-20px",
+                boxShadow:
+                  "0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%) ",
               }}
               title={
                 <Box
@@ -124,7 +139,7 @@ export const MainSide: React.FC = () => {
                   }}
                 />
               </Box>
-            </Tooltip>
+            </StyledTooltip>
           );
         })}
       </Box>

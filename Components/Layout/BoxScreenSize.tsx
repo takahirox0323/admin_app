@@ -7,15 +7,15 @@ import {
 export const BoxScreenSize = (props) => {
   return (
     <BoxComponent
-      {...props}
       display="flex"
       flex={1}
       maxWidth="1100px"
       minWidth="1100px"
       width="100%"
       position="relative"
-      sx={{ margin: "0 auto" }}
       padding={props.padding ?? "0 20px"}
+      margin="0 auto"
+      {...props}
     >
       {props.children}
     </BoxComponent>

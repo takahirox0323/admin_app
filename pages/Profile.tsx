@@ -1,4 +1,3 @@
-import { useFetchSite } from "@/hooks";
 import { useCallback, useEffect, useState } from "react";
 import { Branch } from "@/types/branch";
 import type { NextPage } from "next";
@@ -12,7 +11,7 @@ import { Alert, createTheme, Grid, Stack, ThemeProvider } from "@mui/material";
 import Container from "@mui/material/Container";
 import EditIcon from "@mui/icons-material/Edit";
 import Tooltip from "@mui/material/Tooltip";
-import { AlertDialog } from "@/Components/organizm/Dialog";
+
 import { SimpleTable } from "@/Components/organizm/Table";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import List from "@mui/material/List";
@@ -30,6 +29,7 @@ import BusinessIcon from "@mui/icons-material/Business";
 import StoreTwoToneIcon from "@mui/icons-material/StoreTwoTone";
 import { PageLayout } from "@/Components/organizm/PageLayout";
 import { UserInformation } from "@/Components/template/Profile/UserProfile";
+import { useParkList } from "@/hooks";
 type Props = {
   // branchList?: Branch[];
 };
@@ -43,7 +43,6 @@ export const Profile: NextPage = () => {
 };
 
 const ProfilePage: React.FC = () => {
-  const { branchList } = useFetchSite();
   const [isOpen, setClose] = useState(true);
   const [isDialogOpen, setDialogOpen] = useState(false);
 

@@ -1,4 +1,4 @@
-import { useFetchSite, usePostSite } from "@/hooks";
+import { useParkList } from "@/hooks";
 import { useCallback, useEffect, useState } from "react";
 import type { NextPage } from "next";
 import { ReactQuery } from "@/Components/Layout/ReactQuery";
@@ -21,7 +21,7 @@ const Branches: NextPage = () => {
 };
 
 const BranchPage: React.FC = () => {
-  const { branchList, isError, isLoading } = useFetchSite();
+  const { parkList, isError, isLoading } = useParkList();
   const [value, setValue] = useState("1");
 
   const handleChange = (event, newValue) => {
@@ -33,7 +33,7 @@ const BranchPage: React.FC = () => {
       {isError && (
         <Snackbar
           type="error"
-          data={branchList}
+          data={parkList}
           message="データの取得に失敗しました"
         />
       )}

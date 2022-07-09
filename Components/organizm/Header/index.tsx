@@ -58,7 +58,7 @@ export const Header = (props) => {
   );
   return (
     <>
-      <Box>
+      <Box borderBottom="1px solid #d5d2cd">
         <AppBar
           position="static"
           sx={{

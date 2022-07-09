@@ -5,13 +5,13 @@ body {
   background: #ffffff;
   padding: 0;
   margin: 0;
-
+overflow: hidden;
 }
 
 h1,h2,p{
   padding: 0;
   margin: 0;
-  font-family: "Helvetica Neue", "Arial", "Hiragino Sans", "Meiryo", sans-serif;
+  font-family:  "Arial", "Hiragino Sans", "Meiryo", sans-serif;
 }
 
 .top-img{

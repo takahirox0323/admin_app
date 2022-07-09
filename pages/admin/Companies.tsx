@@ -1,4 +1,3 @@
-import { useFetchSite } from "@/hooks";
 import { useCallback, useEffect, useState } from "react";
 import type { NextPage } from "next";
 import { ReactQuery } from "@/Components/Layout/ReactQuery";
@@ -9,7 +8,7 @@ import Container from "@mui/material/Container";
 import Tooltip from "@mui/material/Tooltip";
 import { SimpleTable } from "@/Components/organizm/Table";
 import { PageLayout } from "@/Components/organizm/PageLayout";
-
+import { useParkList } from "@/hooks";
 
 const Companies: NextPage = () => {
   return (
@@ -20,7 +19,6 @@ const Companies: NextPage = () => {
 };
 
 const BranchPage: React.FC = () => {
-  const { branchList } = useFetchSite();
   const [isOpen, setClose] = useState(true);
   const [isDialogOpen, setDialogOpen] = useState(false);
 
@@ -31,36 +29,32 @@ const BranchPage: React.FC = () => {
   const onChangeModal = () => {
     setClose(!isOpen);
   };
-
-
-
   return (
-      <PageLayout>
-          <Box
-            sx={{
-              background: "#fff",
-              height: "36px",
-              padding: "8px 24px",
-              fontSize: 14,
-              color: "#444444",
-            }}
-          >
-            支社一覧>関東支社
-          </Box>
-          <Container
-                     maxWidth={false}
-            sx={{
-              padding: 2,
-              background: "#e2e9f7",
-              flexGrow: 1,
-              display:"flex",
-              flexDirection:"column"
-            }}
-          >
-             <h1>会社一覧</h1>
-          </Container>
-        </PageLayout>
-
+    <PageLayout>
+      <Box
+        sx={{
+          background: "#fff",
+          height: "36px",
+          padding: "8px 24px",
+          fontSize: 14,
+          color: "#444444",
+        }}
+      >
+        支社一覧関東支社
+      </Box>
+      <Container
+        maxWidth={false}
+        sx={{
+          padding: 2,
+          background: "#e2e9f7",
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <h1>会社一覧</h1>
+      </Container>
+    </PageLayout>
   );
 };
 

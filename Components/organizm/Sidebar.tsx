@@ -18,26 +18,32 @@ export const Sidebar: React.FC<Props> = ({ isOpen }) => {
   const menuItems = [
     {
       id: 1,
-      name: "ダッシュボード",
-      path: "/",
+      name: "公園一覧",
+      path: "/admin",
+      Icon: <DashboardIcon sx={{ color: "#ededed" }} />,
+    },
+    {
+      id: 1,
+      name: "公園タイプ一覧",
+      path: "/admin/ParkTypeList",
       Icon: <DashboardIcon sx={{ color: "#ededed" }} />,
     },
     {
       id: 2,
       name: "ユーザー一覧",
-      path: "/Users",
+      path: "/admin/Users",
       Icon: <GroupIcon sx={{ color: "#ededed" }} />,
     },
     {
       id: 3,
       name: "会社一覧",
-      path: "/Companies",
+      path: "/admin/Companies",
       Icon: <BusinessIcon sx={{ color: "#ededed" }} />,
     },
     {
       id: 4,
       name: "支社一覧",
-      path: "/Branches",
+      path: "/admin/Branches",
       Icon: <StoreTwoToneIcon sx={{ color: "#ededed" }} />,
     },
   ];
@@ -51,12 +57,14 @@ export const Sidebar: React.FC<Props> = ({ isOpen }) => {
               transition: "0.5s",
               left: -200,
               width: 200,
+              minWidth: 200,
               background: "#5787D0",
             }
           : {
               marginLeft: "-200px",
               transition: "0.5s",
               width: 200,
+              minWidth: 200,
               left: 0,
               background: "#5787D0",
             }
@@ -70,21 +78,6 @@ export const Sidebar: React.FC<Props> = ({ isOpen }) => {
         height="100%"
       >
         <Box>
-          <ListItem button>
-            <AppsIcon sx={{ color: "#fff" }} />
-            <Spacer size={12} />
-            <Typography
-              sx={{
-                fontSize: 16,
-                fontWeight: "bold",
-                padding: "12px 0",
-                color: "#fff",
-              }}
-              color="#c9c9c9"
-            >
-              ABC COMPANY
-            </Typography>
-          </ListItem>
           <List>
             {menuItems.map((menu, index) => (
               <ListItem

@@ -1,4 +1,4 @@
-import { useFetchSite, usePostSite } from "@/hooks";
+import { useParkList } from "@/hooks";
 import { useContext, useEffect, useState } from "react";
 import type { NextPage } from "next";
 import { Spacer } from "@/Components/Layout/Spacer";
@@ -18,7 +18,7 @@ const Branches: NextPage = () => {
 };
 
 const BranchPage: React.FC = () => {
-  const { isError, isLoading, branchList } = useFetchSite();
+  const { isError, isLoading, parkList } = useParkList();
 
   return (
     <>
@@ -33,11 +33,10 @@ const BranchPage: React.FC = () => {
             flex: 1,
           }}
         >
-          <PanList />
           <Spacer size={16} vertical />
           <TableEditable />
           <Spacer size={16} vertical />
-          <SimpleTable branchList={branchList} isLoading={isLoading} />
+          {/* <SimpleTable branchList={parkList} isLoading={isLoading} columns={}/> */}
         </Container>
       </PageLayout>
     </>

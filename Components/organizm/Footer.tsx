@@ -14,10 +14,9 @@ export const Footer: React.FC = () => {
       style={{ background: "#52BF90" }}
       minWidth="1100px"
     >
-      <BoxScreenSize height="100%">
+      <BoxScreenSize height="100%" flexShrink={0}>
         <Box
           width="100%"
-          padding={3}
           paddingTop={4}
           paddingBottom={0}
           display="flex"

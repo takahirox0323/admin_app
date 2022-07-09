@@ -17,18 +17,6 @@ export type ParkRequest = {
   price: string;
   categoryId: string;
   createdUserId: string;
+  parkStatusName: string;
   parkTypeId: string;
-  parkStatusId: number;
-};
-
-export type ParkTypeRequest = {
-  name: string;
-};
-
-export type UserRequest = {
-  familyName: string;
-  givenName: string;
-  sexId: number;
-  age: string;
-  createdUserId: string;
 };

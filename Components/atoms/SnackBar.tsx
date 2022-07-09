@@ -12,7 +12,6 @@ type Props = {
 export const Snackbar: React.FC<Props> = ({
   message = "保存に成功しました",
   type,
-  children,
   data,
 }): JSX.Element => {
   const [show, setShow] = useState<boolean>(false);
