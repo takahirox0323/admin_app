@@ -14,8 +14,6 @@ const Branches: NextPage = () => {
 };
 
 const BranchPage: React.FC = () => {
-  const { isError, isLoading, parkList } = useParkList();
-
   const [park, setPark] = useState<ParkTypeRequest>();
   const usePostPark_ = usePostParkType(park);
   const onChangePark = ({ key, value }: { key: string; value: string }) => {

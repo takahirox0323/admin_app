@@ -11,7 +11,11 @@ export const Thumbnail: React.FC<Props> = ({ name, height }) => {
   return (
     <Box
       display="flex"
-      sx={{ paddingTop: height ? "50%" : "100%", background: "#ccc" }}
+      sx={{
+        paddingTop: height ? "50%" : "100%",
+        background: "#ccc",
+        ":hover": { opacity: 0.8 },
+      }}
       position="relative"
       width="100%"
       height={0}

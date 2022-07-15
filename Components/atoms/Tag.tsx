@@ -17,6 +17,7 @@ export const Tag: React.FC<Props> = ({ name }) => {
         mr: 1,
         mb: 1,
         fontSize: 14,
+        ":hover": { opacity: 0.8 },
       }}
     >
       {name}

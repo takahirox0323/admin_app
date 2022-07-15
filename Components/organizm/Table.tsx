@@ -11,11 +11,13 @@ import { Branch } from "@/types/branch";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box, CircularProgress } from "@mui/material";
 import { Loading } from "@/Components/organizm/Loading";
+import Router from "next/router";
 
 type Props = {
   branchList: any;
   isLoading?: boolean;
   columns: any;
+  itemUrl?: string;
 };
 
 const TABLE_SIZE = "40px 1fr 1fr 1fr 1fr 1fr 1fr 1fr";
@@ -24,6 +26,7 @@ export const SimpleTable: React.FC<Props> = ({
   branchList,
   isLoading,
   columns,
+  itemUrl,
 }) => {
   const Body = () => {
     return (
@@ -35,6 +38,9 @@ export const SimpleTable: React.FC<Props> = ({
             {branchList?.map((row) => {
               return (
                 <TableRow
+                  onClick={() =>
+                    itemUrl && Router.push(`${itemUrl}?parkId=${row.id}`)
+                  }
                   hover
                   role="checkbox"
                   tabIndex={-1}

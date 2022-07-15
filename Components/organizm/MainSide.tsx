@@ -1,16 +1,5 @@
-import { useCallback, useEffect, useState, useRef } from "react";
-import type { NextPage } from "next";
-import { ReactQuery } from "@/Components/Layout/ReactQuery";
-import {
-  Box,
-  Button,
-  Container,
-  Fade,
-  Grid,
-  makeStyles,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { useState } from "react";
+import { Box, Fade, Typography } from "@mui/material";
 import { Spacer } from "@/Components/Layout/Spacer";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { Tag, Tags } from "../atoms/Tag";
@@ -69,6 +58,7 @@ export const MainSide: React.FC = () => {
         {AREA.map((area) => {
           return (
             <StyledTooltip
+              componentsProps={{ paper: { sx: { color: "" } } }}
               TransitionComponent={Fade}
               TransitionProps={{ timeout: 0 }}
               onOpen={() => onChangeColor(area.name)}
@@ -90,6 +80,7 @@ export const MainSide: React.FC = () => {
                   <Typography
                     sx={{
                       color: type === area.name ? "#52bf90" : "unset",
+                      ":hover": { color: "#52bf90" },
                     }}
                   >
                     {area.name}
@@ -103,17 +94,23 @@ export const MainSide: React.FC = () => {
                     sx={{
                       borderBottom: `1px solid #dedede
                 `,
+                      ":hover": { color: "#52bf90" },
                     }}
                   >
-                    <Typography color={"#000"}>{area.name}</Typography>
+                    <Typography
+                      color={"#000"}
+                      sx={{ ":hover": { color: "#52bf90" } }}
+                    >
+                      {area.name}
+                    </Typography>
                     <ArrowForwardIosRoundedIcon
                       fontSize="small"
                       sx={{
                         color: "#a9a7a7",
+                        ":hover": { color: "#52bf90" },
                       }}
                     />
                   </Box>
-                  <Box height="300px"></Box>
                 </Box>
               }
             >

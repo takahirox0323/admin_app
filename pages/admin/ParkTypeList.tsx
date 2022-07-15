@@ -34,7 +34,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import DirectionsIcon from "@mui/icons-material/Directions";
-import { parkTypeListColumns } from "@/Components/organizm/Tables/park";
+import { parkTypeListColumns } from "@/Components/atoms/Tables/park";
 import Link from "next/link";
 
 const ParkTypeListPage: NextPage = () => {
@@ -42,7 +42,7 @@ const ParkTypeListPage: NextPage = () => {
 };
 
 const ParkTypeList: React.FC = () => {
-  const { isError, isLoading, parkTypeList } = useParkTypeList();
+  const { isLoading, parkTypeList } = useParkTypeList();
   return (
     <>
       <PageLayout>

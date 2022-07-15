@@ -1,10 +1,22 @@
+import { useParkList, usePostPark } from "@/hooks";
+import { useContext, useEffect, useState, useRef } from "react";
 import type { NextPage } from "next";
 import { Spacer } from "@/Components/Layout/Spacer";
 import Container from "@mui/material/Container";
+import { SimpleTable } from "@/Components/organizm/Table";
 import { PageLayout } from "@/Components/organizm/PageLayout";
-import { Box, Typography, Button, Divider } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Tooltip,
+  Typography,
+  Button,
+  Divider,
+  TextField,
+} from "@mui/material";
 import Paper from "@mui/material/Paper";
-import { ParkRegister } from "@/Components/organizm/admin/ParkRegister";
+import { getPhoto } from "@/hooks/photo";
+import { AdminParkDetail } from "@/Components/organizm/admin/ParkDetail";
 
 const Branches: NextPage = () => {
   return <BranchPage />;
@@ -18,7 +30,6 @@ const BranchPage: React.FC = () => {
           disableGutters={true}
           maxWidth={false}
           sx={{
-            overflow: "scroll",
             padding: "24px 12px",
             background: "#e2e9f7",
             display: "flex",
@@ -37,19 +48,16 @@ const BranchPage: React.FC = () => {
               color="#6f6f6f"
               fontWeight="600"
             >
-              公園登録
+              公園詳細
             </Typography>
           </Box>
 
           <Spacer vertical size={16} />
           <Divider />
           <Spacer vertical size={16} />
-          <Paper>
-            <form>
-              <ParkRegister />
-            </form>
+          <Paper sx={{ padding: 2 }}>
+            <AdminParkDetail />
           </Paper>
-          <Spacer vertical size={16} />
         </Container>
       </PageLayout>
     </>

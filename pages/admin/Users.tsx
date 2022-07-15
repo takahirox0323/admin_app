@@ -10,11 +10,6 @@ import { Spacer } from "@/Components/Layout/Spacer";
 import Container from "@mui/material/Container";
 import { SimpleTable } from "@/Components/organizm/Table";
 import { PageLayout } from "@/Components/organizm/PageLayout";
-import { Snackbar } from "@/Components/atoms/SnackBar";
-import { PanList } from "@/Components/atoms/PanList";
-import { TableEditable } from "@/Components/organizm/TableEditable";
-import { ErrorProvider } from "@/context/error/userProvider";
-import { ErrorContext } from "@/context/error/userContext";
 import {
   Box,
   CircularProgress,
@@ -42,7 +37,7 @@ import DirectionsIcon from "@mui/icons-material/Directions";
 import {
   parkTypeListColumns,
   userListColumns,
-} from "@/Components/organizm/Tables/park";
+} from "@/Components/atoms/Tables/park";
 import Link from "next/link";
 
 const ParkTypeListPage: NextPage = () => {
@@ -50,7 +45,7 @@ const ParkTypeListPage: NextPage = () => {
 };
 
 const ParkTypeList: React.FC = () => {
-  const { isError, isLoading, userList } = useUserList();
+  const { isLoading, userList } = useUserList();
   return (
     <>
       <PageLayout>

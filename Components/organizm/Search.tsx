@@ -1,5 +1,4 @@
 import { createRef, useCallback, useEffect, useState, useRef } from "react";
-import type { NextPage } from "next";
 import styled from "@emotion/styled";
 import { ReactQuery } from "@/Components/Layout/ReactQuery";
 import { Box, Button, Typography } from "@mui/material";
@@ -14,7 +13,6 @@ import Router from "next/router";
 import Tooltip, { TooltipProps } from "@mui/material/Tooltip";
 import { Fade, Grid, makeStyles } from "@mui/material";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import { viVN } from "@mui/x-data-grid";
 import { useParkList } from "@/hooks";
 
 const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
@@ -27,14 +25,61 @@ const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
   }
 `;
 
-export const Search: React.FC = () => {
-  const { parkList } = useParkList();
-  const [isLocationOpen, setLocationClose] = useState(false);
-  const [isParkOpen, setParkClose] = useState(false);
-  const [isOtherOpen, setOtherClose] = useState(false);
-  const raaaef = useRef(null);
+type TabItemTypes = "area" | "purpose" | "other";
 
-  const [isText, setText] = useState<string>("");
+export type SearchRecord = Partial<
+  Record<
+    TabItemTypes,
+    {
+      value: string;
+      isOpen: boolean;
+    }
+  >
+>;
+
+const DEFULT_VALUE = {
+  area: { value: "", isOpen: false },
+  purpose: { value: "", isOpen: false },
+  other: { value: "", isOpen: false },
+};
+
+export const Search: React.FC = () => {
+  const [SearchPram, setSearchPram] = useState<SearchRecord>(DEFULT_VALUE);
+
+  const onChangeSearchPram = ({
+    key,
+    value,
+  }: {
+    key: string;
+    value: string;
+  }) => {
+    setSearchPram({
+      ...SearchPram,
+      [key]: { isOpen: true, value: value },
+    });
+  };
+
+  const onBlurSearchPram = ({
+    key,
+    isOpen,
+  }: {
+    key: string;
+    isOpen: boolean;
+  }) => {
+    setSearchPram({
+      ...SearchPram,
+      [key]: { ...SearchPram[key], isOpen: isOpen },
+    });
+  };
+
+  const deleteSearchPram = ({ key }: { key: string }) => {
+    setSearchPram({
+      ...SearchPram,
+      [key]: { value: "", isOpen: false },
+    });
+  };
+
+  console.log(SearchPram);
 
   const onChangeModal = () => {
     Router.push("/ParkList");
@@ -43,10 +88,11 @@ export const Search: React.FC = () => {
   const searchInput = [
     {
       id: 1,
+      key: "area",
       placeholder: "都道府県・地域から探す",
       hasFlex: true,
-      onOpen: isLocationOpen,
-      onClick: () => setLocationClose(!isLocationOpen),
+      onOpen: SearchPram.area.isOpen,
+      value: SearchPram.area.value,
       icon: (
         <LocationOnRoundedIcon
           sx={{ color: "#52bf90" }}
@@ -56,10 +102,11 @@ export const Search: React.FC = () => {
     },
     {
       id: 2,
+      key: "purpose",
       placeholder: "目的からさがす",
       hasFlex: false,
-      onOpen: isParkOpen,
-      onClick: () => setParkClose(!isParkOpen),
+      onOpen: SearchPram.purpose.isOpen,
+      value: SearchPram.purpose.value,
       icon: (
         <ParkRoundedIcon
           sx={{ color: "#52bf90" }}
@@ -69,10 +116,11 @@ export const Search: React.FC = () => {
     },
     {
       id: 3,
+      key: "other",
       placeholder: "その他・詳細条件",
       hasFlex: false,
-      onOpen: isOtherOpen,
-      onClick: () => setOtherClose(!isOtherOpen),
+      onOpen: SearchPram.other.isOpen,
+      value: SearchPram.other.value,
       icon: (
         <AddRoundedIcon
           sx={{ color: "#52bf90" }}
@@ -81,10 +129,6 @@ export const Search: React.FC = () => {
       ),
     },
   ];
-  const [type, setType] = useState<string>("");
-  const onChangeColor = (name: string) => {
-    setType(name);
-  };
 
   return (
     <Box className="top-img" display="flex" height="450px" minWidth="1100px">
@@ -109,7 +153,6 @@ export const Search: React.FC = () => {
               component="form"
               display="flex"
               height="48px"
-              ref={raaaef}
               noValidate
               autoComplete="off"
             >
@@ -118,11 +161,11 @@ export const Search: React.FC = () => {
                   return (
                     <Grid item xs={3.5}>
                       <StyledTooltip
+                        PopperProps={{}}
                         TransitionComponent={Fade}
                         TransitionProps={{ timeout: 0 }}
-                        onOpen={() => onChangeColor("dfasdsaf")}
                         placement="bottom-start"
-                        open={isText}
+                        open={searchItem.onOpen}
                         sx={{
                           padding: "-20px",
                           boxShadow:
@@ -132,8 +175,9 @@ export const Search: React.FC = () => {
                           <Box
                             sx={{
                               background: "#fff",
-                              width: "250px",
+                              width: "600px",
                               padding: "16px",
+                              zIndex: 10,
                             }}
                           >
                             <Typography
@@ -141,11 +185,9 @@ export const Search: React.FC = () => {
                                 color: "#52bf90",
                               }}
                             >
-                              {isText}
                               <p
                                 onClick={() => {
-                                  console.log("fadfadsfa");
-                                  setText("こんにちは");
+                                  console.log();
                                 }}
                               >
                                 こんにちは
@@ -159,7 +201,9 @@ export const Search: React.FC = () => {
                           display="flex"
                           alignItems="center"
                           sx={{
-                            border: "1px solid #dedede",
+                            border: `1px solid ${
+                              searchItem.onOpen ? "#52bf90" : "#dedede"
+                            }`,
                             width: "100%",
                           }}
                           position="relative"
@@ -167,13 +211,18 @@ export const Search: React.FC = () => {
                           {searchItem.icon}
                           <TextInput
                             placeholder={searchItem.placeholder}
-                            defaultValue={isText}
-                            onChange={(e) => setText(e.target.value)}
-                            onFocus={() => {
-                              searchItem.onClick();
-                            }}
+                            value={searchItem.value}
+                            onChange={(e) =>
+                              onChangeSearchPram({
+                                key: searchItem.key,
+                                value: e.target.value,
+                              })
+                            }
                             onBlur={() => {
-                              searchItem.onClick();
+                              onBlurSearchPram({
+                                key: searchItem.key,
+                                isOpen: false,
+                              });
                             }}
                             style={{
                               padding: "0 32px",
@@ -184,7 +233,14 @@ export const Search: React.FC = () => {
                           />
                           <CloseRoundedIcon
                             sx={{ color: "#dedede" }}
-                            style={{ position: "absolute", right: 4 }}
+                            style={{
+                              position: "absolute",
+                              right: 4,
+                              zIndex: 10,
+                            }}
+                            onClick={() => {
+                              deleteSearchPram({ key: searchItem.key });
+                            }}
                           />
                         </Box>
                       </StyledTooltip>
@@ -217,74 +273,6 @@ export const Search: React.FC = () => {
   );
 };
 
-export const SelectBox: React.FC<Props> = ({
-  Icon,
-  itemList,
-  disableItemIds,
-  initialValue,
-  width,
-  onClick,
-  isDisabled,
-  placeHolder,
-  isEllipsis = true,
-}) => {
-  const [item, setItem] = useState<string>(initialValue);
-  const [isOpen, setModalOpen] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const selectItemsRef = useRef(
-    itemList.map(() => createRef<HTMLDivElement>())
-  );
-  useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      // セレクトボックス外をクリックした場合、非表示に変更する
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setModalOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [wrapperRef]);
-
-  useEffect(() => {
-    scrollToContents(itemList.find((v) => v.name === initialValue)?.id ?? null);
-    setItem(initialValue);
-  }, [initialValue, isOpen]);
-
-  const scrollToContents = (section: number, hasSmooth?: boolean) => {
-    return selectItemsRef.current[section]?.current?.scrollIntoView({
-      behavior: hasSmooth ? "smooth" : "auto",
-    });
-  };
-
-  return (
-    <>
-      <TextInput
-        placeholder={searchItem.placeholder}
-        defaultValue={isText}
-        onChange={(e) => setText(e.target.value)}
-        onFocus={() => {
-          searchItem.onClick();
-        }}
-        onBlur={() => {
-          searchItem.onClick();
-        }}
-        style={{
-          padding: "0 32px",
-          height: 48,
-          width: "100%",
-          border: "unset",
-        }}
-      />
-      {isOpen && itemList.length !== 0 && (
-        <SelectItems width={width}>{options}</SelectItems>
-      )}
-    </>
-  );
-};
-
 const TextInput = styled.input`
   padding: 0px 32px;
   height: 48px;
@@ -293,8 +281,7 @@ const TextInput = styled.input`
   background:unset;
   z-index:1;
   &:focus {
-    border: 1px solid #535ca8;
-    outline: none;
+    outline-color: #52bf90;
   }
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
